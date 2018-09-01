@@ -20,10 +20,13 @@ public class AVL {
         root = insertar(root, 30);
         root = insertar(root, 60);
         root = insertar(root, 28);
-
+        System.out.println("Pre-orden:");
         Arbol.Preorden(root);
         System.out.println("");
-        System.out.println(GetPadre(root, 28).getDato());
+        System.out.println("--------------------------------");
+        System.out.println("Padres:");
+        System.out.println("Padre de 28:");
+        GetPadre(root, 28);
         
         
         System.out.println("");
@@ -43,25 +46,25 @@ public class AVL {
 //        }
 //    }
 
-    static Nodo GetPadre(Nodo root, int dat) {//Obtener Padre
+    static void GetPadre(Nodo root, int dat) {//Obtener Padre
 
         if (root != null) {
             if (root.getDerecho() != null) {
                 if (root.getDerecho().getDato() == dat) {
-                    return root;
+                    System.out.println(root.getDato());
                     
                 }
             }
             if (root.getIzquierdo() != null) {
                 if (root.getIzquierdo().getDato() == dat) {
-                    return root;
+                    System.out.println(root.getDato());
                 }
             }
+            
             GetPadre(root.getIzquierdo(), dat);
             GetPadre(root.getDerecho(), dat);
         }
-        return root;
-
+        
     }
 
     static Nodo insertar(Nodo nodo, int dato) {
