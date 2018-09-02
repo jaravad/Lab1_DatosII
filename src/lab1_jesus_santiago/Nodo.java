@@ -7,18 +7,18 @@ package lab1_jesus_santiago;
  */
 public class Nodo {
     Nodo p;
-    int dato;
+    String dato;
     Nodo izquierdo;
     Nodo derecho;
 
-    public Nodo(int dato) {
+    public Nodo(Nodo padre,String dato) {
         this.dato = dato;
-        this.p=null;
+        this.p=padre;
         this.izquierdo = null;
         this.derecho = null;
     }
 
-    public int getDato() {
+    public String getDato() {
         return dato;
     }
 

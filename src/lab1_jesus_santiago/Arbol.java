@@ -5,17 +5,28 @@
  */
 package lab1_jesus_santiago;
 
+import javax.swing.JTextField;
+
 /**
  *
  * @author Jesus David
  */
 public class Arbol {
+    static void Preorden(Nodo raiz,JTextField jtx) {
+        if (raiz != null) {
+            jtx.setText(jtx.getText()+"[" + raiz.getDato() + "]");
+            Preorden(raiz.getIzquierdo(),jtx);
+            Preorden(raiz.getDerecho(),jtx);
+        }
+
+    }
     static void Preorden(Nodo raiz) {
         if (raiz != null) {
-            System.out.print("[" + raiz.getDato() + "]");
+            System.out.print("[" + raiz.getDato() + "] ");
             Preorden(raiz.getIzquierdo());
             Preorden(raiz.getDerecho());
         }
+        System.out.println("");
 
     }
 

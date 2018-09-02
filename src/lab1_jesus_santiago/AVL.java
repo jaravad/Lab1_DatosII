@@ -2,6 +2,7 @@ package lab1_jesus_santiago;
 
 import java.util.LinkedList;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,43 +14,12 @@ public class AVL {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Scanner s = new Scanner(System.in);
-        Nodo root = null;
-        root = insertar(root, 19);
-        root = insertar(root, 7);
-        root = insertar(root, 8);
-        root = insertar(root, 30);
-        root = insertar(root, 60);
-        root = insertar(root, 28);
-        root = insertar(root, 6);
-        root = insertar(root, 2);
-        root = insertar(root, 9);
-        root = insertar(root, 70);
-        System.out.println("Pre-orden:");
-        Arbol.Preorden(root);
-        System.out.println("");
-        System.out.println("--------------------------------");
-        System.out.println("Padre de 28:");
-        System.out.println(getPadre(root, 28).getDato());
-        System.out.println("Padre de 19:");
-        if (getPadre(root, 19) != null) {
-            System.out.println(getPadre(root, 19).getDato());
-        } else {
-            System.out.println("No tiene padre");
-        }
+        GUI ven = new GUI();
+        ven.setVisible(true);
 
-        System.out.println("Padre de 7:");
-        if (getPadre(root, 7) != null) {
-            System.out.println(getPadre(root, 7).getDato());
-        } else {
-            System.out.println("No tiene padre");
-        }
-
-        if (Primos(root, 2, 70)) {
-            System.out.println("Son primos");
-        } else {
-            System.out.println("No son primos");
-        }
+//        add(root, null, "Juan", 1);
+//        add(root,"Juan","Pedro",1);
+//        add(root,"Juan","Alexa",3);
     }
 
     static int h(Nodo raiz) {
@@ -60,80 +30,33 @@ public class AVL {
         }
     }
 
-    static boolean Primos(Nodo root, int a, int b) {
-        boolean sw = false;
-        try {
-            Nodo padrea = getPadre(root, a);
-            Nodo granpa = getPadre(root, padrea.getDato());
-            Nodo padreb = getPadre(root, b);
-            Nodo granpb = getPadre(root, padreb.getDato());
-
-            if (granpa == granpb) {
-                if (padreb != padrea) {
-
-                    sw = true;
-                }
-
-            }
-        } catch (Exception e) {
-            System.out.println(e.toString());
-
-        }
-        return sw;
-
-    }
-//    static void GetPadre(Nodo root, int dat) {//Obtener Padre
-//
-//        if (root != null) {
-//            if (root.getDerecho() != null) {
-//                if (root.getDerecho().getDato() == dat) {
-//                    System.out.println(root.getDato());
-//                    
-//                }
-//            }
-//            if (root.getIzquierdo() != null) {
-//                if (root.getIzquierdo().getDato() == dat) {
-//                    System.out.println(root.getDato());
-//                }
-//            }
-//            
-//            GetPadre(root.getIzquierdo(), dat);
-//            GetPadre(root.getDerecho(), dat);
-//        }
-//        
-//    }
-
-    static Nodo insertar(Nodo nodo, int dato) {
-        if (nodo == null) {
-            return (new Nodo(dato));
-        }
-
-        if (dato < nodo.getDato()) {
-            nodo.izquierdo = insertar(nodo.izquierdo, dato);
-        } else if (dato > nodo.getDato()) {
-            nodo.derecho = insertar(nodo.derecho, dato);
-        } else {
-            return nodo;
-        }
-        return nodo;
-    }
-
-    static Nodo getPadre(Nodo raiz, int dat) {
+    static void add(Nodo raiz, String father, String dat, int side) {
         LinkedList<Nodo> cola = new LinkedList();
         cola.addFirst(raiz);
+
         while (!cola.isEmpty()) {
             Nodo nodo = cola.removeLast();
+            if (father == null) {
+                nodo.dato = dat;
+            } else if (nodo.dato.equals(father)) {
+                if (side == 1) {
+                    if (nodo.getIzquierdo() == null) {
+                        nodo.setIzquierdo(new Nodo(nodo, dat));
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Lado izquierdo lleno", "Error", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                } else if (side == 2) {
 
-            if (nodo.getIzquierdo() != null) {
-                if (nodo.getIzquierdo().getDato() == dat) {
-                    return nodo;
+                    if (nodo.getDerecho() == null) {
+                        nodo.setDerecho(new Nodo(nodo, dat));
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Lado derecho lleno", "Error", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Argumento lado invalido (1 o 2)", "Error", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
-            if (nodo.getDerecho() != null) {
-                if (nodo.getDerecho().getDato() == dat) {
-                    return nodo;
-                }
-            }
+
             if (nodo.izquierdo != null) {
                 cola.addFirst(nodo.izquierdo);
             }
@@ -142,6 +65,7 @@ public class AVL {
             }
 
         }
-        return null;
+
     }
+
 }
