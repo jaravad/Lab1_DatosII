@@ -18,7 +18,7 @@ public class DrawTree extends JPanel {
     private Nodo Tree;
     private HashMap posicNodos = null;
     private HashMap subtSizes = null;
-    private boolean dirty = true;
+    private boolean sw = true;
     private int parent2child = 20, child2child = 30;
     private Dimension empty = new Dimension(0, 0);
     private FontMetrics fm = null;
@@ -28,17 +28,17 @@ public class DrawTree extends JPanel {
         this.setBackground(Color.WHITE);
         posicNodos = new HashMap();
         subtSizes = new HashMap();
-        dirty = true;
+        sw = true;
         repaint();
     }
 
-    private void calcularPosiciones() {
+    private void calculatePositions() {
         posicNodos.clear();
         subtSizes.clear();
         Nodo root = this.Tree;
         if (root != null) {
             calcularTamañoSubarbol(root);
-            calcularPosicion(root, Integer.MAX_VALUE, Integer.MAX_VALUE, 0);
+            calculatePosition(root, Integer.MAX_VALUE, Integer.MAX_VALUE, 0);
         }
     }
 
@@ -59,7 +59,7 @@ public class DrawTree extends JPanel {
         return d;
     }
 
-    private void calcularPosicion(Nodo n, int left, int right, int top) {
+    private void calculatePosition(Nodo n, int left, int right, int top) {
         if (n == null) {
             return;
         }
@@ -85,8 +85,8 @@ public class DrawTree extends JPanel {
 
         posicNodos.put(n, new Rectangle(center - width / 2 - 3, top, width + 6, fm.getHeight()));
 
-        calcularPosicion(n.getIzquierdo(), Integer.MAX_VALUE, center - child2child / 2, top + fm.getHeight() + parent2child);
-        calcularPosicion(n.getDerecho(), center + child2child / 2, Integer.MAX_VALUE, top + fm.getHeight() + parent2child);
+        calculatePosition(n.getIzquierdo(), Integer.MAX_VALUE, center - child2child / 2, top + fm.getHeight() + parent2child);
+        calculatePosition(n.getDerecho(), center + child2child / 2, Integer.MAX_VALUE, top + fm.getHeight() + parent2child);
     }
 
     private void dibujarArbol(Graphics2D g, Nodo n, int puntox, int puntoy, int yoffs) {
@@ -112,9 +112,9 @@ public class DrawTree extends JPanel {
         super.paint(g);
         fm = g.getFontMetrics();
 
-        if (dirty) {
-            calcularPosiciones();
-            dirty = false;
+        if (sw) {
+            calculatePositions();
+            sw = false;
         }
 
         Graphics2D g2d = (Graphics2D) g;
