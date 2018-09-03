@@ -35,7 +35,7 @@ public class DrawTree2 extends javax.swing.JFrame {
  */
 public DrawTree2() {
         initComponents();
-        setLocationRelativeTo(null);
+        
     }
     private Nodo Tree;
     private HashMap posicNodos = null;
@@ -46,9 +46,12 @@ public DrawTree2() {
     private FontMetrics fm = null;
 
     public DrawTree2(Nodo myTree) {
+        initComponents();
+        setLocationRelativeTo(null);
         this.Tree = myTree;
         this.setBackground(Color.WHITE);
-        setLocationRelativeTo(null);
+        
+        //this.setMinimumSize(new Dimension(800,600));
         posicNodos = new HashMap();
         subtSizes = new HashMap();
         sw = true;
@@ -160,7 +163,6 @@ public DrawTree2() {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
         setResizable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
