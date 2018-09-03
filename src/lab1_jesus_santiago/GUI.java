@@ -43,7 +43,6 @@ public class GUI extends javax.swing.JFrame {
         AddPanel = new javax.swing.JPanel();
         insertar = new javax.swing.JLabel();
         pretxt = new javax.swing.JTextField();
-        jInternalFrame1 = new javax.swing.JInternalFrame();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,34 +65,17 @@ public class GUI extends javax.swing.JFrame {
         pretxt.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pre-orden", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft JhengHei", 0, 11))); // NOI18N
         AddPanel.add(pretxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, 315, 40));
 
-        jInternalFrame1.setBackground(new java.awt.Color(255, 255, 255));
-        jInternalFrame1.setClosable(true);
-        jInternalFrame1.setVisible(true);
-
-        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
-        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
-        jInternalFrame1Layout.setHorizontalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 548, Short.MAX_VALUE)
-        );
-        jInternalFrame1Layout.setVerticalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 309, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(AddPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jInternalFrame1)
+            .addComponent(AddPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(AddPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))
+                .addGap(357, 357, 357)
+                .addComponent(AddPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE))
         );
 
         pack();
@@ -128,11 +110,13 @@ public class GUI extends javax.swing.JFrame {
             }
             if (father == null) {
                 AVL.add(root, father, dato, side);
+                DrawTree dt=new DrawTree(root);
                 pretxt.setText("");
                 Arbol.Preorden(root, pretxt);
             } else if (!dato.isEmpty() && !father.isEmpty()) {
                 
                 AVL.add(root, father, dato, side);
+                DrawTree dt=new DrawTree(root);
                 pretxt.setText("");
                 Arbol.Preorden(root, pretxt);
             } else {
@@ -145,9 +129,7 @@ public class GUI extends javax.swing.JFrame {
 
     
     
-    public JPanel getDibujo() {
-        return new DrawTree(root);
-    }
+    
     
     /**
      * @param args the command line arguments
@@ -187,7 +169,6 @@ public class GUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AddPanel;
     private javax.swing.JLabel insertar;
-    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JTextField pretxt;
     // End of variables declaration//GEN-END:variables
 }
