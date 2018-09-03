@@ -5,7 +5,11 @@
  */
 package lab1_jesus_santiago;
 
+import java.awt.BorderLayout;
+import java.awt.Rectangle;
 import javax.swing.ButtonGroup;
+import javax.swing.JInternalFrame;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -74,7 +78,7 @@ public class GUI extends javax.swing.JFrame {
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 305, Short.MAX_VALUE)
+            .addGap(0, 309, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -126,13 +130,11 @@ public class GUI extends javax.swing.JFrame {
                 AVL.add(root, father, dato, side);
                 pretxt.setText("");
                 Arbol.Preorden(root, pretxt);
-                Arbol.Preorden(root);
             } else if (!dato.isEmpty() && !father.isEmpty()) {
                 
                 AVL.add(root, father, dato, side);
                 pretxt.setText("");
                 Arbol.Preorden(root, pretxt);
-                Arbol.Preorden(root);
             } else {
                 JOptionPane.showMessageDialog(null, "No se aceptan campos vacios", "Error", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -141,6 +143,12 @@ public class GUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_insertarMouseClicked
 
+    
+    
+    public JPanel getDibujo() {
+        return new DrawTree(root);
+    }
+    
     /**
      * @param args the command line arguments
      */
