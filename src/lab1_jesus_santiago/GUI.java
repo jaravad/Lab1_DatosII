@@ -43,11 +43,14 @@ public class GUI extends javax.swing.JFrame {
         AddPanel = new javax.swing.JPanel();
         insertar = new javax.swing.JLabel();
         pretxt = new javax.swing.JTextField();
+        Preview = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        AddPanel.setBackground(new java.awt.Color(255, 255, 255));
         AddPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        insertar.setBackground(new java.awt.Color(255, 255, 255));
         insertar.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 11)); // NOI18N
         insertar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         insertar.setText("Insertar");
@@ -61,21 +64,35 @@ public class GUI extends javax.swing.JFrame {
         AddPanel.add(insertar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 56, 27));
 
         pretxt.setEditable(false);
+        pretxt.setBackground(new java.awt.Color(255, 255, 255));
         pretxt.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 11)); // NOI18N
         pretxt.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pre-orden", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft JhengHei", 0, 11))); // NOI18N
         AddPanel.add(pretxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, 315, 40));
+
+        javax.swing.GroupLayout PreviewLayout = new javax.swing.GroupLayout(Preview);
+        Preview.setLayout(PreviewLayout);
+        PreviewLayout.setHorizontalGroup(
+            PreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        PreviewLayout.setVerticalGroup(
+            PreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 383, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(AddPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
+            .addComponent(Preview, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(357, 357, 357)
-                .addComponent(AddPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE))
+                .addComponent(Preview, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(AddPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))
         );
 
         pack();
@@ -110,13 +127,17 @@ public class GUI extends javax.swing.JFrame {
             }
             if (father == null) {
                 AVL.add(root, father, dato, side);
-                DrawTree dt=new DrawTree(root);
+                
+                DrawTree2 dt=new DrawTree2(root);
+                dt.setVisible(true);
                 pretxt.setText("");
                 Arbol.Preorden(root, pretxt);
             } else if (!dato.isEmpty() && !father.isEmpty()) {
                 
                 AVL.add(root, father, dato, side);
-                DrawTree dt=new DrawTree(root);
+                
+                DrawTree2 dt=new DrawTree2(root);
+                dt.setVisible(true);
                 pretxt.setText("");
                 Arbol.Preorden(root, pretxt);
             } else {
@@ -168,6 +189,7 @@ public class GUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AddPanel;
+    private javax.swing.JPanel Preview;
     private javax.swing.JLabel insertar;
     private javax.swing.JTextField pretxt;
     // End of variables declaration//GEN-END:variables
