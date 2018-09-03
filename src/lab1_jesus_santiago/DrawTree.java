@@ -57,6 +57,8 @@ public class DrawTree extends JPanel {
         subtSizes.put(n, d);
 
         return d;
+        
+        
     }
 
     private void calculatePosition(Nodo n, int left, int right, int top) {
