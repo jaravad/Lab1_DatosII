@@ -89,6 +89,7 @@ public class DTree extends JPanel {
         int width = fm.stringWidth(n.getDato() + "");
 
         posicionNodos.put(n, new Rectangle(center - width / 2 - 3, top, width + 6, fm.getHeight()));
+        System.out.println(center - width / 2 - 3 + ", " + top + ", " + width + 6 + ", " + fm.getHeight());
 
         calcularPosicion(n.getIzquierdo(), Integer.MAX_VALUE, center - child2child / 2, top + fm.getHeight() + parent2child);
         calcularPosicion(n.getDerecho(), center + child2child / 2, Integer.MAX_VALUE, top + fm.getHeight() + parent2child);
@@ -111,23 +112,21 @@ public class DTree extends JPanel {
         dibujarArbol(g, n.getDerecho(), (int) (r.x + r.width / 2), r.y + r.height, yoffs);
 
     }
-    
-    public void paint(Graphics g) 
-   {
-         super.paint(g);
-         fm = g.getFontMetrics();
 
-         if (dirty) 
-         {
-           calcularPosiciones();
-           dirty = false;
-         }
-         
-         Graphics2D g2d = (Graphics2D) g;
-         g2d.translate(getWidth() / 2, parent2child);
-         dibujarArbol(g2d, this.miArbol, Integer.MAX_VALUE, Integer.MAX_VALUE, 
-                  fm.getLeading() + fm.getAscent());
-         fm = null;
-   }
+    public void paint(Graphics g) {
+        super.paint(g);
+        fm = g.getFontMetrics();
+
+        if (dirty) {
+            calcularPosiciones();
+            dirty = false;
+        }
+
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.translate(getWidth() / 2, parent2child);
+        dibujarArbol(g2d, this.miArbol, Integer.MAX_VALUE, Integer.MAX_VALUE,
+                fm.getLeading() + fm.getAscent());
+        fm = null;
+    }
 
 }
