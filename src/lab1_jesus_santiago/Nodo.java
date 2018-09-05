@@ -1,6 +1,8 @@
 
 package lab1_jesus_santiago;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author Jesus David
@@ -10,6 +12,11 @@ public class Nodo {
     String dato;
     Nodo izquierdo;
     Nodo derecho;
+    
+    public Nodo(){
+        this.p=null;
+        this.dato="";
+    }
 
     public Nodo(Nodo padre,String dato) {
         this.dato = dato;
@@ -36,6 +43,10 @@ public class Nodo {
 
     public void setDerecho(Nodo derecho) {
         this.derecho = derecho;
+    }
+    
+    public JPanel getdibujo() {
+        return new DTree(this);
     }
     
 }

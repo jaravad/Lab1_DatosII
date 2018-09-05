@@ -15,7 +15,6 @@ import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import static lab1_jesus_santiago.AVL.add;
 
 /**
  *
@@ -29,9 +28,10 @@ public class GUI extends javax.swing.JFrame {
     public GUI() {
         initComponents();
         setLocationRelativeTo(null);
-        root = new Nodo(null, "");
+
     }
-    Nodo root;
+
+    private Tree SimTree = new Tree();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,6 +45,9 @@ public class GUI extends javax.swing.JFrame {
         AddPanel = new javax.swing.JPanel();
         insertar = new javax.swing.JLabel();
         pretxt = new javax.swing.JTextField();
+        previewpanel = new javax.swing.JPanel();
+        dpane = new javax.swing.JDesktopPane();
+        intframe = new javax.swing.JInternalFrame();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,29 +73,60 @@ public class GUI extends javax.swing.JFrame {
         pretxt.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pre-orden", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft JhengHei", 0, 11))); // NOI18N
         AddPanel.add(pretxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, 315, 40));
 
+        dpane.setOpaque(false);
+
+        intframe.setVisible(true);
+
+        javax.swing.GroupLayout intframeLayout = new javax.swing.GroupLayout(intframe.getContentPane());
+        intframe.getContentPane().setLayout(intframeLayout);
+        intframeLayout.setHorizontalGroup(
+            intframeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 504, Short.MAX_VALUE)
+        );
+        intframeLayout.setVerticalGroup(
+            intframeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 350, Short.MAX_VALUE)
+        );
+
+        dpane.add(intframe);
+        intframe.setBounds(0, 0, 520, 380);
+
+        javax.swing.GroupLayout previewpanelLayout = new javax.swing.GroupLayout(previewpanel);
+        previewpanel.setLayout(previewpanelLayout);
+        previewpanelLayout.setHorizontalGroup(
+            previewpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(dpane, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
+        );
+        previewpanelLayout.setVerticalGroup(
+            previewpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(previewpanelLayout.createSequentialGroup()
+                .addComponent(dpane, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(AddPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
+            .addComponent(AddPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(previewpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(389, 389, 389)
-                .addComponent(AddPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))
+                .addComponent(previewpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(AddPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-ArrayList<JFrame> l = new ArrayList();
-    int i = 0;
-    boolean sw;
+
     private void insertarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_insertarMouseClicked
         String dato, father;
         int side = 1;
         try {
-            if (root.getDato().equals("")) {
+            if (SimTree.myTree.getDato().equals("")) {
                 dato = JOptionPane.showInputDialog(null, "Ingrese el nombre");
                 father = null;
                 side = 1;
@@ -116,41 +150,37 @@ ArrayList<JFrame> l = new ArrayList();
                 }
             }
             if (father == null) {
-                AVL.add(root, father, dato, side);
-
-                if (sw) {
-                    l.get(i - 1).setVisible(false);
-                } else {
-                    sw = true;
-                }
-                i = i + 1;
-                DrawTree2 dt = new DrawTree2(root);
-                l.add(dt);
-                dt.setVisible(true);
+                Tree.add(SimTree.myTree, father, dato, side);
+                this.repintarArbol();
                 pretxt.setText("");
-                Arbol.Preorden(root, pretxt);
+                Arbol.Preorden(SimTree.myTree, pretxt);
             } else if (!dato.isEmpty() && !father.isEmpty()) {
 
-                AVL.add(root, father, dato, side);
-
-                if (sw) {
-                    l.get(i - 1).setVisible(false);
-                } else {
-                    sw = true;
-                }
-                i = i + 1;
-                DrawTree2 dt = new DrawTree2(root);
-                l.add(dt);
-                dt.setVisible(true);
+                Tree.add(SimTree.myTree, father, dato, side);
+                //Draw
+                this.repintarArbol();
                 pretxt.setText("");
-                Arbol.Preorden(root, pretxt);
+                Arbol.Preorden(SimTree.myTree, pretxt);
             } else {
                 JOptionPane.showMessageDialog(null, "No se aceptan campos vacios", "Error", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception e) {
-            System.out.println(e.toString());
+            JOptionPane.showMessageDialog(null, "No se pudo insertar el dato", "Intenta de nuevo...", 0);
         }
+
     }//GEN-LAST:event_insertarMouseClicked
+
+    private void repintarArbol() {
+        this.dpane.removeAll();
+        Rectangle tamaño = this.intframe.getBounds();
+        this.intframe = null;
+        this.intframe = new JInternalFrame("Preview", true);
+        this.dpane.add(this.intframe, JLayeredPane.DEFAULT_LAYER);
+        this.intframe.setVisible(true);
+        this.intframe.setBounds(tamaño);
+        this.intframe.setEnabled(false);
+        this.intframe.add(this.SimTree.getDibujo(), BorderLayout.CENTER);
+    }
 
     /**
      * @param args the command line arguments
@@ -189,7 +219,10 @@ ArrayList<JFrame> l = new ArrayList();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AddPanel;
+    private javax.swing.JDesktopPane dpane;
     private javax.swing.JLabel insertar;
+    private javax.swing.JInternalFrame intframe;
     private javax.swing.JTextField pretxt;
+    private javax.swing.JPanel previewpanel;
     // End of variables declaration//GEN-END:variables
 }
