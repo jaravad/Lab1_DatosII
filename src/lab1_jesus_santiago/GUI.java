@@ -151,6 +151,12 @@ public class GUI extends javax.swing.JFrame {
                 dato = JOptionPane.showInputDialog(null, "Ingrese el nombre");
                 father = null;
                 side = 1;
+                if (dato != null) {
+                    Tree.add(SimTree.myTree, father, dato, side);
+                    this.repintarArbol();
+                    pretxt.setText("");
+                    Arbol.Preorden(SimTree.myTree, pretxt);
+                }
 
             } else {
                 dato = JOptionPane.showInputDialog(null, "Ingrese el nombre");
@@ -163,6 +169,7 @@ public class GUI extends javax.swing.JFrame {
                 bg.add(der);
                 panel.add(izq);
                 panel.add(der);
+                izq.setSelected(true);
                 JOptionPane.showMessageDialog(null, panel);
                 if (izq.isSelected()) {
                     side = 1;
@@ -170,20 +177,17 @@ public class GUI extends javax.swing.JFrame {
                     side = 2;
                 }
             }
-            if (father == null) {
-                Tree.add(SimTree.myTree, father, dato, side);
-                this.repintarArbol();
-                pretxt.setText("");
-                Arbol.Preorden(SimTree.myTree, pretxt);
-            } else if (!dato.isEmpty() && !father.isEmpty()) {
+            if (dato != null && father != null) {
+                if (!dato.isEmpty() && !father.isEmpty()) {
 
-                Tree.add(SimTree.myTree, father, dato, side);
-                //Draw
-                this.repintarArbol();
-                pretxt.setText("");
-                Arbol.Preorden(SimTree.myTree, pretxt);
-            } else {
-                JOptionPane.showMessageDialog(null, "No se aceptan campos vacios", "Error", JOptionPane.INFORMATION_MESSAGE);
+                    Tree.add(SimTree.myTree, father, dato, side);
+                    //Draw:
+                    this.repintarArbol();
+                    pretxt.setText("");
+                    Arbol.Preorden(SimTree.myTree, pretxt);
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se aceptan campos vacios", "Error", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se pudo insertar el dato", "Intenta de nuevo...", 0);

@@ -113,6 +113,7 @@ public class DTree extends JPanel {
 
     }
 
+    @Override
     public void paint(Graphics g) {
         super.paint(g);
         fm = g.getFontMetrics();

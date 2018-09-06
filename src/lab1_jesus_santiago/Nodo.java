@@ -8,14 +8,15 @@ import javax.swing.JPanel;
  * @author Jesus David
  */
 public class Nodo {
-    Nodo p;
-    String dato;
-    Nodo izquierdo;
-    Nodo derecho;
+    private Nodo p;
+    private String dato;
+    private Nodo izquierdo;
+    private Nodo derecho;
     
     public Nodo(){
-        this.p=null;
         this.dato="";
+        this.setDerecho(null);
+        this.setIzquierdo(null);
     }
 
     public Nodo(Nodo padre,String dato) {
@@ -27,6 +28,17 @@ public class Nodo {
 
     public String getDato() {
         return dato;
+    }
+    
+    public void setDato(String s){
+        this.dato=s;
+    }
+    
+    public Nodo getPadre(){
+        return this.p;
+    }
+    public void setPadre(Nodo n){
+        this.p=n;
     }
 
     public Nodo getIzquierdo() {

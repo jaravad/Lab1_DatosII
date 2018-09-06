@@ -20,15 +20,15 @@ public class Tree {
         return this.myTree.getdibujo();
     }
     
-    static void add(Nodo raiz, String father, String dat, int side) {
+    static void add(Nodo raiz, String father, String dat, int side) {//Recorrido por niveles adaptado para insertar
         LinkedList<Nodo> cola = new LinkedList();
         cola.addFirst(raiz);
 
         while (!cola.isEmpty()) {
             Nodo nodo = cola.removeLast();
             if (father == null) {
-                nodo.dato = dat;
-            } else if (nodo.dato.equals(father)) {
+                nodo.setDato(dat);
+            } else if (nodo.getDato().equals(father)) {
                 if (side == 1) {
                     if (nodo.getIzquierdo() == null) {
                         nodo.setIzquierdo(new Nodo(nodo, dat));
@@ -47,11 +47,11 @@ public class Tree {
                 }
             }
 
-            if (nodo.izquierdo != null) {
-                cola.addFirst(nodo.izquierdo);
+            if (nodo.getIzquierdo() != null) {
+                cola.addFirst(nodo.getIzquierdo());
             }
-            if (nodo.derecho != null) {
-                cola.addFirst(nodo.derecho);
+            if (nodo.getDerecho() != null) {
+                cola.addFirst(nodo.getDerecho());
             }
 
         }
