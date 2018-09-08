@@ -22,11 +22,10 @@ public class Arbol {
     }
     static void Preorden(Nodo raiz) {
         if (raiz != null) {
-            System.out.print("[" + raiz.getDato() + "] ");
+            System.out.print("[" + raiz.getPos()+ "] ");
             Preorden(raiz.getIzquierdo());
             Preorden(raiz.getDerecho());
         }
-        System.out.println("");
 
     }
 

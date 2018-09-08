@@ -28,6 +28,7 @@ public class Tree {
             Nodo nodo = cola.removeLast();
             if (father == null) {
                 nodo.setDato(dat);
+                
             } else if (nodo.getDato().equals(father)) {
                 if (side == 1) {
                     if (nodo.getIzquierdo() == null) {
@@ -57,4 +58,27 @@ public class Tree {
         }
 
     }
+    
+    static Nodo buscar(Nodo root,String dat) {//Recorrido por niveles adaptado para buscar
+        LinkedList<Nodo> cola = new LinkedList();
+        cola.addFirst(root);
+        Nodo node=null;
+
+        while (!cola.isEmpty()) {
+            Nodo nodo = cola.removeLast();
+            if (nodo.getDato().equals(dat)) {
+                node=nodo;
+            }
+
+            if (nodo.getIzquierdo() != null) {
+                cola.addFirst(nodo.getIzquierdo());
+            }
+            if (nodo.getDerecho() != null) {
+                cola.addFirst(nodo.getDerecho());
+            }
+        }
+        return node;
+
+    }
+    
 }

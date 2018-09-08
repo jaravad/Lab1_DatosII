@@ -1,6 +1,7 @@
 
 package lab1_jesus_santiago;
 
+import java.awt.Rectangle;
 import javax.swing.JPanel;
 
 /**
@@ -12,6 +13,8 @@ public class Nodo {
     private String dato;
     private Nodo izquierdo;
     private Nodo derecho;
+    private int pos;
+    
     
     public Nodo(){
         this.dato="";
@@ -55,6 +58,14 @@ public class Nodo {
 
     public void setDerecho(Nodo derecho) {
         this.derecho = derecho;
+    }
+    
+    public int getPos() {
+        return pos;
+    }
+    
+    public void setPos(int p){
+        this.pos=p;
     }
     
     public JPanel getdibujo() {

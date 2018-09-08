@@ -89,7 +89,7 @@ public class DTree extends JPanel {
         int width = fm.stringWidth(n.getDato() + "");
 
         posicionNodos.put(n, new Rectangle(center - width / 2 - 3, top, width + 6, fm.getHeight()));
-        System.out.println(center - width / 2 - 3 + ", " + top + ", " + width + 6 + ", " + fm.getHeight());
+        
 
         calcularPosicion(n.getIzquierdo(), Integer.MAX_VALUE, center - child2child / 2, top + fm.getHeight() + parent2child);
         calcularPosicion(n.getDerecho(), center + child2child / 2, Integer.MAX_VALUE, top + fm.getHeight() + parent2child);

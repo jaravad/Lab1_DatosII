@@ -6,6 +6,8 @@
 package lab1_jesus_santiago;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import javax.swing.ButtonGroup;
@@ -29,9 +31,17 @@ public class GUI extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
 
+//        Test testpanel = new Test();
+//        Frame jf = new Frame();
+//        jf.setTitle("test");
+//        jf.setSize(600, 400);
+//        jf.setVisible(true);
+//        jf.add(testpanel);
+
+
     }
 
-    private Tree SimTree = new Tree();
+    private Tree GenTree = new Tree();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,10 +55,11 @@ public class GUI extends javax.swing.JFrame {
         AddPanel = new javax.swing.JPanel();
         insertar = new javax.swing.JLabel();
         pretxt = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         previewpanel = new javax.swing.JPanel();
         dpane = new javax.swing.JDesktopPane();
         intframe = new javax.swing.JInternalFrame();
-        jPanel1 = new javax.swing.JPanel();
+        ppane = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,10 +85,23 @@ public class GUI extends javax.swing.JFrame {
         pretxt.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pre-orden", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft JhengHei", 0, 11))); // NOI18N
         AddPanel.add(pretxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, 315, 40));
 
+        jLabel1.setText("jLabel1");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+        AddPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 30, 60, 20));
+
         dpane.setOpaque(false);
 
         intframe.setFont(new java.awt.Font("Microsoft YaHei", 0, 12)); // NOI18N
         intframe.setVisible(true);
+        intframe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                intframeMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout intframeLayout = new javax.swing.GroupLayout(intframe.getContentPane());
         intframe.getContentPane().setLayout(intframeLayout);
@@ -106,38 +130,43 @@ public class GUI extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(520, 384));
+        ppane.setBackground(new java.awt.Color(255, 255, 255));
+        ppane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ppaneMouseClicked(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout ppaneLayout = new javax.swing.GroupLayout(ppane);
+        ppane.setLayout(ppaneLayout);
+        ppaneLayout.setHorizontalGroup(
+            ppaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 384, Short.MAX_VALUE)
+        ppaneLayout.setVerticalGroup(
+            ppaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 379, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(AddPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1070, Short.MAX_VALUE)
+            .addComponent(AddPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 994, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
                 .addComponent(previewpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(ppane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(previewpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(AddPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ppane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(AddPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE))
         );
 
         pack();
@@ -145,17 +174,22 @@ public class GUI extends javax.swing.JFrame {
 
     private void insertarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_insertarMouseClicked
         String dato, father;
-        int side = 1;
+        int side = 1,pos=0;
         try {
-            if (SimTree.myTree.getDato().equals("")) {
+            if (GenTree.myTree.getDato().equals("")) {
                 dato = JOptionPane.showInputDialog(null, "Ingrese el nombre");
                 father = null;
+                
                 side = 1;
                 if (dato != null) {
-                    Tree.add(SimTree.myTree, father, dato, side);
+                    pos=ppane.getWidth()/2;
+                    Tree.add(GenTree.myTree, father, dato, side);
+                    Tree.buscar(GenTree.myTree, dato).setPos(pos);
                     this.repintarArbol();
                     pretxt.setText("");
-                    Arbol.Preorden(SimTree.myTree, pretxt);
+                    Arbol.Preorden(GenTree.myTree, pretxt);
+                    Arbol.Preorden(GenTree.myTree);
+                    System.out.println("");
                 }
 
             } else {
@@ -171,6 +205,7 @@ public class GUI extends javax.swing.JFrame {
                 panel.add(der);
                 izq.setSelected(true);
                 JOptionPane.showMessageDialog(null, panel);
+                
                 if (izq.isSelected()) {
                     side = 1;
                 } else if (der.isSelected()) {
@@ -180,11 +215,19 @@ public class GUI extends javax.swing.JFrame {
             if (dato != null && father != null) {
                 if (!dato.isEmpty() && !father.isEmpty()) {
 
-                    Tree.add(SimTree.myTree, father, dato, side);
-                    //Draw:
+                    Tree.add(GenTree.myTree, father, dato, side);
+                    if (side==1) {
+                        pos=Tree.buscar(GenTree.myTree, dato).getPadre().getPos()/2;
+                    }else if (side==2){
+                        pos=Tree.buscar(GenTree.myTree, dato).getPadre().getPos()+Tree.buscar(GenTree.myTree, dato).getPadre().getPos()/2;
+                    }
+                    Tree.buscar(GenTree.myTree, dato).setPos(pos);
+                    
                     this.repintarArbol();
                     pretxt.setText("");
-                    Arbol.Preorden(SimTree.myTree, pretxt);
+                    Arbol.Preorden(GenTree.myTree, pretxt);
+                    Arbol.Preorden(GenTree.myTree);
+                    System.out.println("");
                 } else {
                     JOptionPane.showMessageDialog(null, "No se aceptan campos vacios", "Error", JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -195,7 +238,22 @@ public class GUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_insertarMouseClicked
 
+    private void intframeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_intframeMouseClicked
+
+    }//GEN-LAST:event_intframeMouseClicked
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void ppaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ppaneMouseClicked
+        System.out.println(evt.getX()+", "+evt.getY());
+    }//GEN-LAST:event_ppaneMouseClicked
+
     private void repintarArbol() {
+        Graphics g =ppane.getGraphics();
+        g.setColor(Color.red);
+        g.drawRect(ppane.getWidth()/2-50, ppane.getHeight()/2-50, 100, 100);
         this.dpane.removeAll();
         Rectangle tamaño = this.intframe.getBounds();
         this.intframe = null;
@@ -204,7 +262,7 @@ public class GUI extends javax.swing.JFrame {
         this.intframe.setVisible(true);
         this.intframe.setBounds(tamaño);
         this.intframe.setEnabled(false);
-        this.intframe.add(this.SimTree.getDibujo(), BorderLayout.CENTER);
+        this.intframe.add(this.GenTree.getDibujo(), BorderLayout.CENTER);
     }
 
     /**
@@ -247,7 +305,8 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JDesktopPane dpane;
     private javax.swing.JLabel insertar;
     private javax.swing.JInternalFrame intframe;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel ppane;
     private javax.swing.JTextField pretxt;
     private javax.swing.JPanel previewpanel;
     // End of variables declaration//GEN-END:variables
