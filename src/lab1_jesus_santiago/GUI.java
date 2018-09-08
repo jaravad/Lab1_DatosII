@@ -10,9 +10,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import javax.swing.ButtonGroup;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -172,13 +175,21 @@ public class GUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public JComboBox fathers=new JComboBox();
+    
     private void insertarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_insertarMouseClicked
         String dato, father;
         int side = 1,pos=0;
         try {
             if (GenTree.myTree.getDato().equals("")) {
-                dato = JOptionPane.showInputDialog(null, "Ingrese el nombre");
+                dato = JOptionPane.showInputDialog(null, "Ingrese el nombre del primer elemento");
+                
+                
                 father = null;
+                fathers.addItem(dato);
+//                final JPanel fpanel = new JPanel();
+//                fpanel.add(fathers);
+//                JOptionPane.showMessageDialog(null, fpanel);
                 
                 side = 1;
                 if (dato != null) {
@@ -193,8 +204,15 @@ public class GUI extends javax.swing.JFrame {
                 }
 
             } else {
-                dato = JOptionPane.showInputDialog(null, "Ingrese el nombre");
-                father = JOptionPane.showInputDialog(null, "Ingrese nombre del padre");
+                dato = JOptionPane.showInputDialog(null, "Ingrese el nombre del dato a insertar");
+                final JPanel fpanel = new JPanel();
+                final JLabel label=new JLabel();
+                label.setText("Seleccione padre del dato a insertar: ");
+                fpanel.add(label);
+                fpanel.add(fathers);
+                JOptionPane.showMessageDialog(null, fpanel);
+                
+                father = String.valueOf(fathers.getSelectedItem());
                 final JPanel panel = new JPanel();
                 final JRadioButton izq = new JRadioButton("Izquierdo");
                 final JRadioButton der = new JRadioButton("Derecho");
@@ -216,6 +234,7 @@ public class GUI extends javax.swing.JFrame {
                 if (!dato.isEmpty() && !father.isEmpty()) {
 
                     Tree.add(GenTree.myTree, father, dato, side);
+                    fathers.addItem(dato);
                     if (side==1) {
                         pos=Tree.buscar(GenTree.myTree, dato).getPadre().getPos()/2;
                     }else if (side==2){
@@ -238,6 +257,26 @@ public class GUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_insertarMouseClicked
 
+//    public void addfathers(JComboBox combo, Nodo root){
+//        LinkedList<Nodo> cola = new LinkedList();
+//        cola.addFirst(root);
+//
+//        while (!cola.isEmpty()) {
+//            Nodo nodo = cola.removeLast();
+//            if(nodo.getPadre()!=null){
+//                fathers.addItem(nodo.getPadre());
+//            }
+//
+//            if (nodo.getIzquierdo() != null) {
+//                cola.addFirst(nodo.getIzquierdo());
+//            }
+//            if (nodo.getDerecho() != null) {
+//                cola.addFirst(nodo.getDerecho());
+//            }
+//
+//        }
+//    }
+    
     private void intframeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_intframeMouseClicked
 
     }//GEN-LAST:event_intframeMouseClicked
@@ -250,6 +289,7 @@ public class GUI extends javax.swing.JFrame {
         System.out.println(evt.getX()+", "+evt.getY());
     }//GEN-LAST:event_ppaneMouseClicked
 
+    
     private void repintarArbol() {
         Graphics g =ppane.getGraphics();
         g.setColor(Color.red);
