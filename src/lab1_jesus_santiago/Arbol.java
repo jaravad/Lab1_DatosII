@@ -12,17 +12,19 @@ import javax.swing.JTextField;
  * @author Jesus David
  */
 public class Arbol {
-    static void Preorden(Nodo raiz,JTextField jtx) {
+
+    static void Preorden(Nodo raiz, JTextField jtx) {
         if (raiz != null) {
-            jtx.setText(jtx.getText()+"[" + raiz.getDato() + "]");
-            Preorden(raiz.getIzquierdo(),jtx);
-            Preorden(raiz.getDerecho(),jtx);
+            jtx.setText(jtx.getText() + "[" + raiz.getDato() + "]");
+            Preorden(raiz.getIzquierdo(), jtx);
+            Preorden(raiz.getDerecho(), jtx);
         }
 
     }
+
     static void Preorden(Nodo raiz) {
         if (raiz != null) {
-            System.out.print("[" + raiz.getPos()+ "] ");
+            System.out.print("[" + raiz.getX() + "]" + "[" + raiz.getY() + "], ");
             Preorden(raiz.getIzquierdo());
             Preorden(raiz.getDerecho());
         }
@@ -42,6 +44,6 @@ public class Arbol {
             PostOrden(raiz.getIzquierdo());
             PostOrden(raiz.getDerecho());
             System.out.print("[" + raiz.getDato() + "]");
-        } 
+        }
     }
 }

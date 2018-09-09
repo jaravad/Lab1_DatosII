@@ -13,7 +13,7 @@ public class Nodo {
     private String dato;
     private Nodo izquierdo;
     private Nodo derecho;
-    private int pos;
+    private int x,y,level;
     
     
     public Nodo(){
@@ -35,6 +35,14 @@ public class Nodo {
     
     public void setDato(String s){
         this.dato=s;
+    }
+    
+    public int getLevel() {
+        return level;
+    }
+    
+    public void setLevel(int s){
+        this.level=s;
     }
     
     public Nodo getPadre(){
@@ -60,12 +68,20 @@ public class Nodo {
         this.derecho = derecho;
     }
     
-    public int getPos() {
-        return pos;
+    public int getX() {
+        return x;
     }
     
-    public void setPos(int p){
-        this.pos=p;
+    public void setX(int p){
+        this.x=p;
+    }
+    
+    public int getY() {
+        return y;
+    }
+    
+    public void setY(int p){
+        this.y=p;
     }
     
     public JPanel getdibujo() {

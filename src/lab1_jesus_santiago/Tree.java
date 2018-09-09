@@ -28,11 +28,14 @@ public class Tree {
             Nodo nodo = cola.removeLast();
             if (father == null) {
                 nodo.setDato(dat);
+                nodo.setLevel(0);
                 
             } else if (nodo.getDato().equals(father)) {
                 if (side == 1) {
                     if (nodo.getIzquierdo() == null) {
                         nodo.setIzquierdo(new Nodo(nodo, dat));
+                        nodo.getIzquierdo().setLevel(nodo.getLevel()+1);
+                        GUI.fathers.addItem(dat);
                     } else {
                         JOptionPane.showMessageDialog(null, "Lado izquierdo lleno", "Error", JOptionPane.INFORMATION_MESSAGE);
                     }
@@ -40,6 +43,8 @@ public class Tree {
 
                     if (nodo.getDerecho() == null) {
                         nodo.setDerecho(new Nodo(nodo, dat));
+                        nodo.getDerecho().setLevel(nodo.getLevel()+1);
+                        GUI.fathers.addItem(dat);
                     } else {
                         JOptionPane.showMessageDialog(null, "Lado derecho lleno", "Error", JOptionPane.INFORMATION_MESSAGE);
                     }
