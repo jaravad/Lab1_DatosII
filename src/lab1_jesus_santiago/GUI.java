@@ -53,10 +53,6 @@ public class GUI extends javax.swing.JFrame {
         AddPanel = new javax.swing.JPanel();
         insertar = new javax.swing.JLabel();
         pretxt = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        previewpanel = new javax.swing.JPanel();
-        dpane = new javax.swing.JDesktopPane();
-        intframe = new javax.swing.JInternalFrame();
         ppane = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -75,58 +71,13 @@ public class GUI extends javax.swing.JFrame {
                 insertarMouseClicked(evt);
             }
         });
-        AddPanel.add(insertar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 56, 27));
+        AddPanel.add(insertar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 56, 27));
 
         pretxt.setEditable(false);
         pretxt.setBackground(new java.awt.Color(255, 255, 255));
         pretxt.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 11)); // NOI18N
         pretxt.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pre-orden", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft JhengHei", 0, 11))); // NOI18N
-        AddPanel.add(pretxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, 315, 40));
-
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        AddPanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 30, -1, -1));
-
-        dpane.setOpaque(false);
-
-        intframe.setFont(new java.awt.Font("Microsoft YaHei", 0, 12)); // NOI18N
-        intframe.setVisible(true);
-        intframe.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                intframeMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout intframeLayout = new javax.swing.GroupLayout(intframe.getContentPane());
-        intframe.getContentPane().setLayout(intframeLayout);
-        intframeLayout.setHorizontalGroup(
-            intframeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 54, Short.MAX_VALUE)
-        );
-        intframeLayout.setVerticalGroup(
-            intframeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 40, Short.MAX_VALUE)
-        );
-
-        dpane.add(intframe);
-        intframe.setBounds(0, 0, 70, 70);
-
-        javax.swing.GroupLayout previewpanelLayout = new javax.swing.GroupLayout(previewpanel);
-        previewpanel.setLayout(previewpanelLayout);
-        previewpanelLayout.setHorizontalGroup(
-            previewpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(dpane, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
-        );
-        previewpanelLayout.setVerticalGroup(
-            previewpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(previewpanelLayout.createSequentialGroup()
-                .addComponent(dpane, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        AddPanel.add(pretxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 315, 40));
 
         ppane.setBackground(new java.awt.Color(255, 255, 255));
         ppane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -151,19 +102,13 @@ public class GUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(AddPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1071, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(previewpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ppane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(AddPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
+            .addComponent(ppane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ppane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(previewpanel, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(ppane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(9, 9, 9)
                 .addComponent(AddPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE))
         );
@@ -195,6 +140,7 @@ public class GUI extends javax.swing.JFrame {
                     y = 30;
                     Tree.buscar(GenTree.myTree, dato).setX(x);
                     Tree.buscar(GenTree.myTree, dato).setY(y);
+                    repintarArbol(GenTree.myTree);
                     pretxt.setText("");
                     Arbol.Preorden(GenTree.myTree, pretxt);
                     Arbol.Preorden(GenTree.myTree);
@@ -227,54 +173,54 @@ public class GUI extends javax.swing.JFrame {
                 } else if (der.isSelected()) {
                     side = 2;
                 }
-            }
-            if (dato != null && father != null) {
-                if (!dato.isEmpty() && !father.isEmpty()) {
 
-                    Tree.add(GenTree.myTree, father, dato, side);
+                boolean sw = Tree.existe(GenTree.myTree, dato);
+                System.out.println(sw);
+                if (dato != null && father != null && sw == false) {
+                    if (!dato.isEmpty() && !father.isEmpty() ) {
 
-                    y = Tree.buscar(GenTree.myTree, dato).getPadre().getY() + 40;
-                    double exp;
-                    int factor;
-                    if (side == 1) {
-                        exp = Tree.buscar(GenTree.myTree, father).getLevel() + 2;
-                        factor = (int) (ppane.getWidth() / Math.pow(2, exp));
-                        Tree.buscar(GenTree.myTree, dato).setX((Tree.buscar(GenTree.myTree, dato).getPadre().getX()) - factor);
-                        Tree.buscar(GenTree.myTree, dato).setY(Tree.buscar(GenTree.myTree, dato).getPadre().getY() + 60);
-                    } else if (side == 2) {
-                        exp = Tree.buscar(GenTree.myTree, father).getLevel() + 2;
-                        factor = (int) (ppane.getWidth() / Math.pow(2, exp));
-                        Tree.buscar(GenTree.myTree, dato).setX((Tree.buscar(GenTree.myTree, dato).getPadre().getX()) + factor);
-                        Tree.buscar(GenTree.myTree, dato).setY(Tree.buscar(GenTree.myTree, dato).getPadre().getY() + 60);
+                        Tree.add(GenTree.myTree, father, dato, side);
+
+                        y = Tree.buscar(GenTree.myTree, dato).getPadre().getY() + 40;
+                        double exp;
+                        int factor;
+                        if (side == 1) {
+                            exp = Tree.buscar(GenTree.myTree, father).getLevel() + 2;
+                            factor = (int) (ppane.getWidth() / Math.pow(2, exp));
+                            Tree.buscar(GenTree.myTree, dato).setX((Tree.buscar(GenTree.myTree, dato).getPadre().getX()) - factor);
+                            Tree.buscar(GenTree.myTree, dato).setY(Tree.buscar(GenTree.myTree, dato).getPadre().getY() + 60);
+                        } else if (side == 2) {
+                            exp = Tree.buscar(GenTree.myTree, father).getLevel() + 2;
+                            factor = (int) (ppane.getWidth() / Math.pow(2, exp));
+                            Tree.buscar(GenTree.myTree, dato).setX((Tree.buscar(GenTree.myTree, dato).getPadre().getX()) + factor);
+                            Tree.buscar(GenTree.myTree, dato).setY(Tree.buscar(GenTree.myTree, dato).getPadre().getY() + 60);
+                        }
+                        repintarArbol(GenTree.myTree);
+                        //repintarArbol(GenTree.myTree);
+                        pretxt.setText("");
+                        Arbol.Preorden(GenTree.myTree, pretxt);
+                        Arbol.Preorden(GenTree.myTree);
+                        System.out.println("");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No se aceptan campos vacios", "Error", JOptionPane.INFORMATION_MESSAGE);
                     }
-                    //repintarArbol(GenTree.myTree);
-                    pretxt.setText("");
-                    Arbol.Preorden(GenTree.myTree, pretxt);
-                    Arbol.Preorden(GenTree.myTree);
-                    System.out.println("");
-                } else {
-                    JOptionPane.showMessageDialog(null, "No se aceptan campos vacios", "Error", JOptionPane.INFORMATION_MESSAGE);
+                } else if (sw == true) {
+                    JOptionPane.showMessageDialog(null, "No se pudo insertar el dato, ya existe", "Error", 0);
+
                 }
             }
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se pudo insertar el dato", "Intenta de nuevo...", 0);
         }
-        repintarArbol(GenTree.myTree);
+
 
     }//GEN-LAST:event_insertarMouseClicked
 
 
-    private void intframeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_intframeMouseClicked
-
-    }//GEN-LAST:event_intframeMouseClicked
-
     private void ppaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ppaneMouseClicked
         System.out.println(evt.getX() + ", " + evt.getY());
     }//GEN-LAST:event_ppaneMouseClicked
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     public void draw(Nodo nodo, Nodo root) {
 
@@ -283,23 +229,22 @@ public class GUI extends javax.swing.JFrame {
             Graphics g = ppane.getGraphics();
             Graphics g2d = (Graphics2D) ppane.getGraphics();
             g2d.setFont(font);
+            g2d.setColor(Color.white);
             FontMetrics fm = g2d.getFontMetrics(font);
 
             Nodo padre = nodo.getPadre();
-            if (padre != null) { //Evitar excepcion puntero nulo debido a la raiz
+            if (padre != null) {
                 g.drawLine(padre.getX() + 10, padre.getY() + 10, nodo.getX() + 10, nodo.getY() + 10);
-            }
-            if (padre != null) { //Repintar al padre por la linea
                 g.setColor(Color.darkGray);
-                g.fillRect(padre.getX(), padre.getY(), 50, 25);
+                g.fillRect(padre.getX() - (fm.stringWidth(padre.getDato()) + 6) / 2, padre.getY(), fm.stringWidth(padre.getDato()) + 6, fm.getHeight() + 2);
                 g.setColor(Color.black);
-                g.drawString(padre.getDato() + "", padre.getX() + 3, padre.getY() + 14);
+                g2d.drawString(padre.getDato() + "", padre.getX(), padre.getY() + 14);
             }
 
             g.setColor(Color.darkGray);
-            g.fillRect(nodo.getX(), nodo.getY(), 50, 25);
+            g.fillRect(nodo.getX() - (fm.stringWidth(nodo.getDato()) + 6) / 2, nodo.getY(), fm.stringWidth(nodo.getDato()) + 6, fm.getHeight() + 2);
             g.setColor(Color.white);
-            g.drawString(nodo.getDato() + "", nodo.getX() + 3, nodo.getY() + 14);
+            g2d.drawString(nodo.getDato() + "", nodo.getX() + 3, nodo.getY() + 14);
 
             g.setColor(Color.cyan);
 
@@ -322,20 +267,6 @@ public class GUI extends javax.swing.JFrame {
             repintarArbol(raiz.getDerecho());
             draw(raiz, aux);
         }
-    }
-
-    private void repintarArbol() {
-
-        //youtube
-        this.dpane.removeAll();
-        Rectangle tamaño = this.intframe.getBounds();
-        this.intframe = null;
-        this.intframe = new JInternalFrame("Preview", true);
-        this.dpane.add(this.intframe, JLayeredPane.DEFAULT_LAYER);
-        this.intframe.setVisible(true);
-        this.intframe.setBounds(tamaño);
-        this.intframe.setEnabled(false);
-        this.intframe.add(this.GenTree.getDibujo(), BorderLayout.CENTER);
     }
 
     /**
@@ -375,12 +306,8 @@ public class GUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AddPanel;
-    private javax.swing.JDesktopPane dpane;
     private javax.swing.JLabel insertar;
-    private javax.swing.JInternalFrame intframe;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel ppane;
     private javax.swing.JTextField pretxt;
-    private javax.swing.JPanel previewpanel;
     // End of variables declaration//GEN-END:variables
 }

@@ -16,10 +16,6 @@ import javax.swing.JPanel;
 public class Tree {
     Nodo myTree=new Nodo();
     
-    public JPanel getDibujo() {
-        return this.myTree.getdibujo();
-    }
-    
     static void add(Nodo raiz, String father, String dat, int side) {//Recorrido por niveles adaptado para insertar
         LinkedList<Nodo> cola = new LinkedList();
         cola.addFirst(raiz);
@@ -83,6 +79,28 @@ public class Tree {
             }
         }
         return node;
+
+    }
+    
+    static boolean existe(Nodo root,String dat) {
+        LinkedList<Nodo> cola = new LinkedList();
+        cola.addFirst(root);
+        Boolean sw=false;
+
+        while (!cola.isEmpty()) {
+            Nodo nodo = cola.removeLast();
+            if(nodo.getDato().equals(dat)){
+                sw=true;
+            }
+
+            if (nodo.getIzquierdo() != null) {
+                cola.addFirst(nodo.getIzquierdo());
+            }
+            if (nodo.getDerecho() != null) {
+                cola.addFirst(nodo.getDerecho());
+            }
+        }
+        return sw;
 
     }
     

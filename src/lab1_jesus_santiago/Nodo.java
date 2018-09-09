@@ -13,7 +13,8 @@ public class Nodo {
     private String dato;
     private Nodo izquierdo;
     private Nodo derecho;
-    private int x,y,level;
+    private int x,y,level,width,height;
+    
     
     
     public Nodo(){
@@ -29,12 +30,28 @@ public class Nodo {
         this.derecho = null;
     }
 
-    public String getDato() {
-        return dato;
+    public int getWidth() {
+        return width;
+    }
+    
+    public void setWidth(int s){
+        this.width=s;
+    }
+    
+    public int getHeight() {
+        return height;
+    }
+    
+    public void setHeight(int s){
+        this.height=s;
     }
     
     public void setDato(String s){
         this.dato=s;
+    }
+    
+    public String getDato() {
+        return dato;
     }
     
     public int getLevel() {
@@ -82,10 +99,6 @@ public class Nodo {
     
     public void setY(int p){
         this.y=p;
-    }
-    
-    public JPanel getdibujo() {
-        return new DTree(this);
     }
     
 }
