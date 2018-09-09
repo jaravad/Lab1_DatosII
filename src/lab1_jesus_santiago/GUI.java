@@ -11,8 +11,10 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
@@ -36,6 +38,8 @@ public class GUI extends javax.swing.JFrame {
     public GUI() {
         initComponents();
         setLocationRelativeTo(null);
+        String[] fontNames = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+        System.out.println(Arrays.toString(fontNames));
 
     }
 
@@ -121,7 +125,7 @@ public class GUI extends javax.swing.JFrame {
     private void insertarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_insertarMouseClicked
         String dato, father;
         int side = 1, x = 0, y = 0;
-        Font font = new Font("Serif", Font.PLAIN, 12);
+        Font font = new Font("Tahoma", Font.PLAIN, 14);
         Graphics g2d = (Graphics2D) ppane.getGraphics();
         g2d.setFont(font);
         FontMetrics fm = g2d.getFontMetrics(font);
@@ -223,16 +227,46 @@ public class GUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_insertarMouseClicked
 
+    public Nodo Track(Nodo root, int x, int y) {
+        Font font = new Font("Tahoma", Font.PLAIN, 14);
+        Graphics g2d = (Graphics2D) ppane.getGraphics();
+        g2d.setFont(font);
+        FontMetrics fm = g2d.getFontMetrics(font);
+
+        LinkedList<Nodo> cola = new LinkedList();
+        cola.addFirst(root);
+        Nodo n = null;
+
+        while (!cola.isEmpty()) {
+            Nodo nodo = cola.removeLast();
+            if (x >= nodo.getX() - (fm.stringWidth(nodo.getDato()) + 6) / 2 && x <= (nodo.getX() + nodo.getWidth()) && y >= nodo.getY() && y <= nodo.getY() + nodo.getHeight()) {
+                n = nodo;
+            }
+            if (nodo.getIzquierdo() != null) {
+                cola.addFirst(nodo.getIzquierdo());
+            }
+            if (nodo.getDerecho() != null) {
+                cola.addFirst(nodo.getDerecho());
+            }
+        }
+        return n;
+    }
+
 
     private void ppaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ppaneMouseClicked
-        System.out.println(evt.getX() + ", " + evt.getY());
+        try {
+            System.out.println(Track(GenTree.myTree, evt.getX(), evt.getY()).getDato());
+        } catch (Exception e) {
+            System.out.println("Fuera de rango");
+        }
     }//GEN-LAST:event_ppaneMouseClicked
 
     public void draw(Nodo nodo, Nodo root) {
 
         try {
-            Font font = new Font("Serif", Font.PLAIN, 12);
+            Font font = new Font("Tahoma", Font.PLAIN, 14);
             Graphics g = ppane.getGraphics();
+            g.setColor(Color.BLACK);
             Graphics g2d = (Graphics2D) ppane.getGraphics();
             g2d.setFont(font);
             g2d.setColor(Color.white);
@@ -240,24 +274,21 @@ public class GUI extends javax.swing.JFrame {
 
             Nodo padre = nodo.getPadre();
             if (padre != null) {
-                g.drawLine(padre.getX() + 10, padre.getY() + 10, nodo.getX() + 10, nodo.getY() + 10);
-                g.setColor(Color.darkGray);
+                g.drawLine(padre.getX() + 10 - (fm.stringWidth(padre.getDato()) + 6) / 2, padre.getY() + 10, nodo.getX() + 10, nodo.getY() + 10);
+                g.setColor(Color.white);
                 g.fillRect(padre.getX() - (fm.stringWidth(padre.getDato()) + 6) / 2, padre.getY(), padre.getWidth(), padre.getHeight());
-
                 g.setColor(Color.black);
-                g2d.drawString(padre.getDato() + "", padre.getX()-(fm.stringWidth(padre.getDato()))/2, padre.getY() + 14);
+                g.drawRect(padre.getX() - (fm.stringWidth(padre.getDato()) + 6) / 2, padre.getY(), padre.getWidth(), padre.getHeight());
+                g.setColor(Color.black);
+                g2d.drawString(padre.getDato() + "", padre.getX() - (fm.stringWidth(padre.getDato())) / 2, padre.getY() + 14);
             }
 
-            g.setColor(Color.darkGray);
-            g.fillRect(nodo.getX() - (fm.stringWidth(nodo.getDato()) + 6) / 2, nodo.getY(), nodo.getWidth(), nodo.getHeight());
             g.setColor(Color.white);
-            g2d.drawString(nodo.getDato() + "", nodo.getX() -(fm.stringWidth(nodo.getDato()))/2, nodo.getY() + 14);
-
-            g.setColor(Color.cyan);
-
-            g.drawLine(ppane.getWidth() / 2, 0, ppane.getWidth() / 2, ppane.getHeight());
-            g.drawLine(ppane.getWidth() / 4, 0, ppane.getWidth() / 4, ppane.getHeight());
-            g.drawLine(ppane.getWidth() / 8, 0, ppane.getWidth() / 8, ppane.getHeight());
+            g.fillRect(nodo.getX() - (fm.stringWidth(nodo.getDato()) + 6) / 2, nodo.getY(), nodo.getWidth(), nodo.getHeight());
+            g.setColor(Color.black);
+            g.drawRect(nodo.getX() - (fm.stringWidth(nodo.getDato()) + 6) / 2, nodo.getY(), nodo.getWidth(), nodo.getHeight());
+            g2d.setColor(Color.black);
+            g2d.drawString(nodo.getDato() + "", nodo.getX() - (fm.stringWidth(nodo.getDato())) / 2, nodo.getY() + 14);
 
         } catch (Exception e) {
             System.out.println(e.toString());
