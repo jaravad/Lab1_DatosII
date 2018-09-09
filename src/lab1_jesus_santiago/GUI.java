@@ -125,6 +125,7 @@ public class GUI extends javax.swing.JFrame {
         Graphics g2d = (Graphics2D) ppane.getGraphics();
         g2d.setFont(font);
         FontMetrics fm = g2d.getFontMetrics(font);
+
         try {
             if (GenTree.myTree.getDato().equals("")) {
                 dato = JOptionPane.showInputDialog(null, "Ingrese el nombre del primer elemento");
@@ -140,6 +141,8 @@ public class GUI extends javax.swing.JFrame {
                     y = 30;
                     Tree.buscar(GenTree.myTree, dato).setX(x);
                     Tree.buscar(GenTree.myTree, dato).setY(y);
+                    Tree.buscar(GenTree.myTree, dato).setWidth(fm.stringWidth(dato) + 6);
+                    Tree.buscar(GenTree.myTree, dato).setHeight(fm.getHeight() + 2);
                     repintarArbol(GenTree.myTree);
                     pretxt.setText("");
                     Arbol.Preorden(GenTree.myTree, pretxt);
@@ -177,7 +180,7 @@ public class GUI extends javax.swing.JFrame {
                 boolean sw = Tree.existe(GenTree.myTree, dato);
                 System.out.println(sw);
                 if (dato != null && father != null && sw == false) {
-                    if (!dato.isEmpty() && !father.isEmpty() ) {
+                    if (!dato.isEmpty() && !father.isEmpty()) {
 
                         Tree.add(GenTree.myTree, father, dato, side);
 
@@ -195,6 +198,9 @@ public class GUI extends javax.swing.JFrame {
                             Tree.buscar(GenTree.myTree, dato).setX((Tree.buscar(GenTree.myTree, dato).getPadre().getX()) + factor);
                             Tree.buscar(GenTree.myTree, dato).setY(Tree.buscar(GenTree.myTree, dato).getPadre().getY() + 60);
                         }
+                        Tree.buscar(GenTree.myTree, dato).setWidth(fm.stringWidth(dato) + 6);
+                        Tree.buscar(GenTree.myTree, dato).setHeight(fm.getHeight() + 2);
+
                         repintarArbol(GenTree.myTree);
                         //repintarArbol(GenTree.myTree);
                         pretxt.setText("");
@@ -236,15 +242,16 @@ public class GUI extends javax.swing.JFrame {
             if (padre != null) {
                 g.drawLine(padre.getX() + 10, padre.getY() + 10, nodo.getX() + 10, nodo.getY() + 10);
                 g.setColor(Color.darkGray);
-                g.fillRect(padre.getX() - (fm.stringWidth(padre.getDato()) + 6) / 2, padre.getY(), fm.stringWidth(padre.getDato()) + 6, fm.getHeight() + 2);
+                g.fillRect(padre.getX() - (fm.stringWidth(padre.getDato()) + 6) / 2, padre.getY(), padre.getWidth(), padre.getHeight());
+
                 g.setColor(Color.black);
-                g2d.drawString(padre.getDato() + "", padre.getX(), padre.getY() + 14);
+                g2d.drawString(padre.getDato() + "", padre.getX()-(fm.stringWidth(padre.getDato()))/2, padre.getY() + 14);
             }
 
             g.setColor(Color.darkGray);
-            g.fillRect(nodo.getX() - (fm.stringWidth(nodo.getDato()) + 6) / 2, nodo.getY(), fm.stringWidth(nodo.getDato()) + 6, fm.getHeight() + 2);
+            g.fillRect(nodo.getX() - (fm.stringWidth(nodo.getDato()) + 6) / 2, nodo.getY(), nodo.getWidth(), nodo.getHeight());
             g.setColor(Color.white);
-            g2d.drawString(nodo.getDato() + "", nodo.getX() + 3, nodo.getY() + 14);
+            g2d.drawString(nodo.getDato() + "", nodo.getX() -(fm.stringWidth(nodo.getDato()))/2, nodo.getY() + 14);
 
             g.setColor(Color.cyan);
 
