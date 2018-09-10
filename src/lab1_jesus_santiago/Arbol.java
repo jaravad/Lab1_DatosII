@@ -13,14 +13,7 @@ import javax.swing.JTextField;
  */
 public class Arbol {
 
-    static void Preorden(Nodo raiz, JTextField jtx) {
-        if (raiz != null) {
-            jtx.setText(jtx.getText() + "[" + raiz.getDato() + "]");
-            Preorden(raiz.getIzquierdo(), jtx);
-            Preorden(raiz.getDerecho(), jtx);
-        }
-
-    }
+    
 
     static void Preorden(Nodo raiz) {
         if (raiz != null) {
