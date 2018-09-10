@@ -58,9 +58,11 @@ public class GUI extends javax.swing.JFrame {
         list = new javax.swing.JList<>();
         consult = new javax.swing.JLabel();
         cleantree = new javax.swing.JLabel();
+        selectedn = new javax.swing.JLabel();
         ppane = new javax.swing.JPanel();
         help = new javax.swing.JLabel();
         cleans = new javax.swing.JLabel();
+        result = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,54 +72,79 @@ public class GUI extends javax.swing.JFrame {
         AddPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         insertar.setBackground(new java.awt.Color(255, 255, 255));
-        insertar.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 11)); // NOI18N
+        insertar.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        insertar.setForeground(new java.awt.Color(255, 51, 51));
         insertar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         insertar.setText("Insertar");
-        insertar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        insertar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
         insertar.setOpaque(true);
         insertar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 insertarMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                insertarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                insertarMouseExited(evt);
+            }
         });
-        AddPanel.add(insertar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 60, 30));
+        AddPanel.add(insertar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 60, 30));
 
         pretxt.setEditable(false);
         pretxt.setBackground(new java.awt.Color(255, 255, 255));
         pretxt.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 11)); // NOI18N
         pretxt.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pre-orden", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft JhengHei", 0, 11))); // NOI18N
-        AddPanel.add(pretxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, 90, 40));
+        AddPanel.add(pretxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 90, 40));
 
         list.setFont(new java.awt.Font("Microsoft JhengHei", 0, 12)); // NOI18N
         jScrollPane1.setViewportView(list);
 
-        AddPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 30, 80, 60));
+        AddPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 30, 140, 60));
 
         consult.setBackground(new java.awt.Color(255, 255, 255));
-        consult.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 11)); // NOI18N
+        consult.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        consult.setForeground(new java.awt.Color(102, 0, 204));
         consult.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         consult.setText("Consultar");
-        consult.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        consult.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 0, 204)));
         consult.setOpaque(true);
         consult.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 consultMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                consultMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                consultMouseExited(evt);
+            }
         });
-        AddPanel.add(consult, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 40, 70, 27));
+        AddPanel.add(consult, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, 70, 30));
 
         cleantree.setBackground(new java.awt.Color(255, 255, 255));
-        cleantree.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 11)); // NOI18N
+        cleantree.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        cleantree.setForeground(new java.awt.Color(0, 153, 102));
         cleantree.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         cleantree.setText("Limpiar Arbol");
-        cleantree.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        cleantree.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 102)));
         cleantree.setOpaque(true);
         cleantree.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cleantreeMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cleantreeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cleantreeMouseExited(evt);
+            }
         });
-        AddPanel.add(cleantree, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, 90, 27));
+        AddPanel.add(cleantree, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, 90, 30));
+
+        selectedn.setFont(new java.awt.Font("Microsoft JhengHei UI", 2, 10)); // NOI18N
+        selectedn.setText("Nodos seleccionados:");
+        AddPanel.add(selectedn, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 10, -1, -1));
 
         ppane.setBackground(new java.awt.Color(255, 255, 255));
         ppane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -130,13 +157,31 @@ public class GUI extends javax.swing.JFrame {
 
         help.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 11)); // NOI18N
 
-        cleans.setFont(new java.awt.Font("Microsoft JhengHei", 0, 11)); // NOI18N
+        cleans.setFont(new java.awt.Font("Microsoft JhengHei", 1, 11)); // NOI18N
+        cleans.setForeground(new java.awt.Color(0, 0, 255));
         cleans.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         cleans.setText("Limpiar selección");
-        cleans.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        cleans.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 255)));
         cleans.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cleansMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cleansMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cleansMouseExited(evt);
+            }
+        });
+
+        result.setEditable(false);
+        result.setBackground(new java.awt.Color(255, 255, 255));
+        result.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        result.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "Relación", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 11)))); // NOI18N
+        result.setFocusable(false);
+        result.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resultActionPerformed(evt);
             }
         });
 
@@ -147,17 +192,24 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(ppaneLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(ppaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(help, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cleans, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(ppaneLayout.createSequentialGroup()
+                        .addComponent(cleans, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(result, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(ppaneLayout.createSequentialGroup()
+                        .addComponent(help, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         ppaneLayout.setVerticalGroup(
             ppaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ppaneLayout.createSequentialGroup()
-                .addContainerGap(244, Short.MAX_VALUE)
-                .addComponent(cleans)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap()
                 .addComponent(help, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
+                .addComponent(cleans, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62)
+                .addComponent(result, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -348,9 +400,64 @@ public class GUI extends javax.swing.JFrame {
     boolean GrandP(Nodo a, Nodo b) {
         boolean sw = false;
         try {
-            if (a.getPadre().getPadre() == b || b.getPadre().getPadre() == a) {
+            if (a.getPadre().getPadre() == b) {
                 sw = true;
 
+            }
+        } catch (Exception e) {
+
+        }
+        return sw;
+
+    }
+
+    boolean Daddy(Nodo a, Nodo b) {
+        boolean sw = false;
+        try {
+            if (a.getPadre() == b) {
+                sw = true;
+
+            }
+        } catch (Exception e) {
+
+        }
+        return sw;
+
+    }
+
+    boolean Uncle(Nodo a, Nodo b){
+        boolean sw=false;
+        try{
+            if (a.getPadre().getPadre()==b.getPadre()) {
+                sw=true;
+            }
+        }catch(Exception e){
+            
+        }
+        return sw;
+    }
+    boolean Bro(Nodo a, Nodo b) {
+        boolean sw = false;
+        try {
+            if (a.getPadre() == b.getPadre()) {
+                sw = true;
+
+            }
+        } catch (Exception e) {
+
+        }
+        return sw;
+
+    }
+
+    boolean Cousin(Nodo a, Nodo b) {
+        boolean sw = false;
+        try {
+            if (Bro(a.getPadre(), b.getPadre())) {
+
+                if (a.getPadre() != b.getPadre()) {
+                    sw = true;
+                }
             }
         } catch (Exception e) {
 
@@ -364,27 +471,100 @@ public class GUI extends javax.swing.JFrame {
             v = Tree.buscar(GenTree.myTree, String.valueOf(model.getElementAt(0)));
             w = Tree.buscar(GenTree.myTree, String.valueOf(model.getElementAt(1)));
             try {
-                if (GrandP(v, w) == true) {
-                    System.out.println("Abuelo");
+                if (GrandP(v, w)) {
+                    result.setText("");
+                    result.setText("\"" + w.getDato() + "\" es abuelo(a) de " + "\"" + v.getDato() + "\"");
+                } else if (GrandP(w, v)) {
+                    result.setText("");
+                    result.setText("\"" + v.getDato() + "\" es abuelo(a) de " + "\"" + w.getDato() + "\"");
+                } else if (Bro(v, w)) {
+                    result.setText("");
+                    result.setText("\"" + v.getDato() + "\" y " + "\"" + w.getDato() + "\"" + " son hermanos(as)");
+                } else if (Cousin(v, w)) {
+                    result.setText("");
+                    result.setText("\"" + v.getDato() + "\" y " + "\"" + w.getDato() + "\"" + " son primos(as)");
+                } else if (Daddy(v, w)) {
+                    result.setText("");
+                    result.setText("\"" + w.getDato() + "\" es padre de " + "\"" + v.getDato() + "\"");
+                } else if (Daddy(w, v)) {
+                    result.setText("");
+                    result.setText("\"" + v.getDato() + "\" es padre de " + "\"" + w.getDato() + "\"");
+                }else if(Uncle(v,w)){
+                    result.setText("");
+                    result.setText("\"" + w.getDato() + "\" es tio(a) de " + "\"" + v.getDato() + "\"");
+                }else if (Uncle(w,v)){
+                    result.setText("");
+                    result.setText("\"" + v.getDato() + "\" es tio(a) de " + "\"" + w.getDato() + "\"");
+                }else{
+                    System.out.println("N/A");
                 }
             } catch (Exception e) {
 
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar dos(2) nodos", "Aviso", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_consultMouseClicked
 
     private void cleansMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cleansMouseClicked
         redrawTree(GenTree.myTree);
         model.clear();
+        result.setText("");
     }//GEN-LAST:event_cleansMouseClicked
 
     private void cleantreeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cleantreeMouseClicked
         GenTree = new Tree();
-        ppane.removeAll();
         ppane.repaint();
         redrawTree(GenTree.myTree);
+        result.setText("");
+        fathers.removeAllItems();
+        pretxt.setText("");
 
     }//GEN-LAST:event_cleantreeMouseClicked
+
+    private void resultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resultActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_resultActionPerformed
+
+    private void insertarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_insertarMouseEntered
+        insertar.setForeground(Color.white);
+        insertar.setBackground(new Color(255, 51, 51));
+    }//GEN-LAST:event_insertarMouseEntered
+
+    private void insertarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_insertarMouseExited
+        insertar.setForeground(new Color(255, 51, 51));
+        insertar.setBackground(Color.white);
+    }//GEN-LAST:event_insertarMouseExited
+
+    private void consultMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_consultMouseEntered
+        consult.setForeground(Color.white);
+        consult.setBackground(new Color(102, 0, 204));
+    }//GEN-LAST:event_consultMouseEntered
+
+    private void consultMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_consultMouseExited
+        consult.setForeground(new Color(102, 0, 204));
+        consult.setBackground(Color.white);
+    }//GEN-LAST:event_consultMouseExited
+
+    private void cleantreeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cleantreeMouseEntered
+        cleantree.setForeground(Color.white);
+        cleantree.setBackground(new Color(0, 153, 102));
+    }//GEN-LAST:event_cleantreeMouseEntered
+
+    private void cleantreeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cleantreeMouseExited
+        cleantree.setForeground(new Color(0, 153, 102));
+        cleantree.setBackground(Color.white);
+    }//GEN-LAST:event_cleantreeMouseExited
+
+    private void cleansMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cleansMouseEntered
+        cleans.setForeground(Color.white);
+        cleans.setBackground(new Color(0,0,255));
+    }//GEN-LAST:event_cleansMouseEntered
+
+    private void cleansMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cleansMouseExited
+        cleans.setForeground(new Color(0,0,255));
+        cleans.setBackground(Color.white);
+    }//GEN-LAST:event_cleansMouseExited
 
     public void draw(Nodo nodo, Nodo root) {
 
@@ -478,5 +658,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JList<String> list;
     private javax.swing.JPanel ppane;
     private javax.swing.JTextField pretxt;
+    private javax.swing.JTextField result;
+    private javax.swing.JLabel selectedn;
     // End of variables declaration//GEN-END:variables
 }
