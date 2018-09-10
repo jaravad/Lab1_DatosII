@@ -5,23 +5,19 @@
  */
 package lab1_jesus_santiago;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GraphicsEnvironment;
-import java.awt.Rectangle;
-import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.LinkedList;
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
+
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
+
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -38,8 +34,9 @@ public class GUI extends javax.swing.JFrame {
     public GUI() {
         initComponents();
         setLocationRelativeTo(null);
-        String[] fontNames = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
-        System.out.println(Arrays.toString(fontNames));
+        String texto = "<html><body>Seleccione dos nodos con doble<br>clic y presione \"Consultar\" para<br>averiguar la relación </body></html>";
+        help.setText(texto);
+        list.setModel(model);
 
     }
 
@@ -57,11 +54,19 @@ public class GUI extends javax.swing.JFrame {
         AddPanel = new javax.swing.JPanel();
         insertar = new javax.swing.JLabel();
         pretxt = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        list = new javax.swing.JList<>();
+        consult = new javax.swing.JLabel();
+        cleantree = new javax.swing.JLabel();
         ppane = new javax.swing.JPanel();
+        help = new javax.swing.JLabel();
+        cleans = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         AddPanel.setBackground(new java.awt.Color(255, 255, 255));
+        AddPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        AddPanel.setForeground(new java.awt.Color(204, 204, 204));
         AddPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         insertar.setBackground(new java.awt.Color(255, 255, 255));
@@ -75,19 +80,63 @@ public class GUI extends javax.swing.JFrame {
                 insertarMouseClicked(evt);
             }
         });
-        AddPanel.add(insertar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 56, 27));
+        AddPanel.add(insertar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 60, 30));
 
         pretxt.setEditable(false);
         pretxt.setBackground(new java.awt.Color(255, 255, 255));
         pretxt.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 11)); // NOI18N
         pretxt.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pre-orden", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft JhengHei", 0, 11))); // NOI18N
-        AddPanel.add(pretxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 315, 40));
+        AddPanel.add(pretxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, 90, 40));
+
+        list.setFont(new java.awt.Font("Microsoft JhengHei", 0, 12)); // NOI18N
+        jScrollPane1.setViewportView(list);
+
+        AddPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 30, 80, 60));
+
+        consult.setBackground(new java.awt.Color(255, 255, 255));
+        consult.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 11)); // NOI18N
+        consult.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        consult.setText("Consultar");
+        consult.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        consult.setOpaque(true);
+        consult.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                consultMouseClicked(evt);
+            }
+        });
+        AddPanel.add(consult, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 40, 70, 27));
+
+        cleantree.setBackground(new java.awt.Color(255, 255, 255));
+        cleantree.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 11)); // NOI18N
+        cleantree.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cleantree.setText("Limpiar Arbol");
+        cleantree.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        cleantree.setOpaque(true);
+        cleantree.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cleantreeMouseClicked(evt);
+            }
+        });
+        AddPanel.add(cleantree, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, 90, 27));
 
         ppane.setBackground(new java.awt.Color(255, 255, 255));
-        ppane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ppane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        ppane.setForeground(new java.awt.Color(204, 204, 204));
         ppane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ppaneMouseClicked(evt);
+            }
+        });
+
+        help.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 11)); // NOI18N
+
+        cleans.setFont(new java.awt.Font("Microsoft JhengHei", 0, 11)); // NOI18N
+        cleans.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cleans.setText("Limpiar selección");
+        cleans.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        cleans.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cleansMouseClicked(evt);
             }
         });
 
@@ -95,26 +144,36 @@ public class GUI extends javax.swing.JFrame {
         ppane.setLayout(ppaneLayout);
         ppaneLayout.setHorizontalGroup(
             ppaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(ppaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(ppaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(help, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cleans, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ppaneLayout.setVerticalGroup(
             ppaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 379, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ppaneLayout.createSequentialGroup()
+                .addContainerGap(244, Short.MAX_VALUE)
+                .addComponent(cleans)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(help, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(AddPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
+            .addComponent(AddPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)
             .addComponent(ppane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(ppane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
-                .addComponent(AddPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(AddPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE))
         );
 
         pack();
@@ -147,10 +206,9 @@ public class GUI extends javax.swing.JFrame {
                     Tree.buscar(GenTree.myTree, dato).setY(y);
                     Tree.buscar(GenTree.myTree, dato).setWidth(fm.stringWidth(dato) + 6);
                     Tree.buscar(GenTree.myTree, dato).setHeight(fm.getHeight() + 2);
-                    repintarArbol(GenTree.myTree);
+                    redrawTree(GenTree.myTree);
                     pretxt.setText("");
                     Arbol.Preorden(GenTree.myTree, pretxt);
-                    Arbol.Preorden(GenTree.myTree);
                     System.out.println("");
                 }
 
@@ -205,11 +263,10 @@ public class GUI extends javax.swing.JFrame {
                         Tree.buscar(GenTree.myTree, dato).setWidth(fm.stringWidth(dato) + 6);
                         Tree.buscar(GenTree.myTree, dato).setHeight(fm.getHeight() + 2);
 
-                        repintarArbol(GenTree.myTree);
+                        redrawTree(GenTree.myTree);
                         //repintarArbol(GenTree.myTree);
                         pretxt.setText("");
                         Arbol.Preorden(GenTree.myTree, pretxt);
-                        Arbol.Preorden(GenTree.myTree);
                         System.out.println("");
                     } else {
                         JOptionPane.showMessageDialog(null, "No se aceptan campos vacios", "Error", JOptionPane.INFORMATION_MESSAGE);
@@ -252,14 +309,82 @@ public class GUI extends javax.swing.JFrame {
         return n;
     }
 
+    DefaultListModel model = new DefaultListModel();
+
 
     private void ppaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ppaneMouseClicked
-        try {
-            System.out.println(Track(GenTree.myTree, evt.getX(), evt.getY()).getDato());
-        } catch (Exception e) {
-            System.out.println("Fuera de rango");
+        if (evt.getClickCount() == 2) {
+
+            Nodo node = Track(GenTree.myTree, evt.getX(), evt.getY());
+            if (model.size() < 2 && node != null) {
+                boolean sw = false;
+
+                for (int i = 0; i < model.getSize(); i++) {
+                    if (node.getDato().equals(model.getElementAt(i))) {
+                        sw = true;
+                    }
+                }
+                if (sw == false) {
+                    model.addElement(node.getDato());
+                }
+
+                Font font = new Font("Tahoma", Font.PLAIN, 14);
+                Graphics g = ppane.getGraphics();
+                Graphics2D g2d = (Graphics2D) (ppane.getGraphics());
+                g2d.setColor(Color.black);
+                g2d.setFont(font);
+                FontMetrics fm = g2d.getFontMetrics(font);
+                g.setColor(new Color(255, 255, 102));
+                g.fillRect(node.getX() - (fm.stringWidth(node.getDato()) + 6) / 2, node.getY(), node.getWidth(), node.getHeight());
+                g.setColor(Color.black);
+                g2d.drawString(node.getDato() + "", node.getX() - (fm.stringWidth(node.getDato())) / 2, node.getY() + 14);
+                g.drawRect(node.getX() - (fm.stringWidth(node.getDato()) + 6) / 2, node.getY(), node.getWidth(), node.getHeight());
+
+            }
+
         }
     }//GEN-LAST:event_ppaneMouseClicked
+
+    boolean GrandP(Nodo a, Nodo b) {
+        boolean sw = false;
+        try {
+            if (a.getPadre().getPadre() == b || b.getPadre().getPadre() == a) {
+                sw = true;
+
+            }
+        } catch (Exception e) {
+
+        }
+        return sw;
+
+    }
+    private void consultMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_consultMouseClicked
+        if (model.getSize() == 2) {
+            Nodo v, w;
+            v = Tree.buscar(GenTree.myTree, String.valueOf(model.getElementAt(0)));
+            w = Tree.buscar(GenTree.myTree, String.valueOf(model.getElementAt(1)));
+            try {
+                if (GrandP(v, w) == true) {
+                    System.out.println("Abuelo");
+                }
+            } catch (Exception e) {
+
+            }
+        }
+    }//GEN-LAST:event_consultMouseClicked
+
+    private void cleansMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cleansMouseClicked
+        redrawTree(GenTree.myTree);
+        model.clear();
+    }//GEN-LAST:event_cleansMouseClicked
+
+    private void cleantreeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cleantreeMouseClicked
+        GenTree = new Tree();
+        ppane.removeAll();
+        ppane.repaint();
+        redrawTree(GenTree.myTree);
+
+    }//GEN-LAST:event_cleantreeMouseClicked
 
     public void draw(Nodo nodo, Nodo root) {
 
@@ -297,12 +422,12 @@ public class GUI extends javax.swing.JFrame {
 
     Nodo aux = GenTree.myTree;
 
-    public void repintarArbol(Nodo raiz) {
+    public void redrawTree(Nodo raiz) {
 
         if (raiz != null) {
             draw(raiz, aux);
-            repintarArbol(raiz.getIzquierdo());
-            repintarArbol(raiz.getDerecho());
+            redrawTree(raiz.getIzquierdo());
+            redrawTree(raiz.getDerecho());
             draw(raiz, aux);
         }
     }
@@ -344,7 +469,13 @@ public class GUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AddPanel;
+    private javax.swing.JLabel cleans;
+    private javax.swing.JLabel cleantree;
+    private javax.swing.JLabel consult;
+    private javax.swing.JLabel help;
     private javax.swing.JLabel insertar;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> list;
     private javax.swing.JPanel ppane;
     private javax.swing.JTextField pretxt;
     // End of variables declaration//GEN-END:variables
